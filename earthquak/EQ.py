@@ -3,10 +3,9 @@ from openpyxl import load_workbook
 import pandas as pd
 def Earthquak_load_cal():
 
-	try:
-		wb=load_workbook('earthquak/db.xlsx')
-	except:
-		wb=load_workbook('/earthquak/db.xlsx')
+	
+	wb=load_workbook('earthquak/db.xlsx')
+	
 	sheet=wb['sheet']
 
 	st.header('Earthquak load calculation')
