@@ -181,6 +181,8 @@ def Earthquak_load_cal():
 			to_df2.append(['Site coeffecient,Fa',Fa])
 			to_df2.append(['Site coeffecient,Fv',Fv])
 			to_df2.append(['zone factor,Z',Z])
+			to_df2.append(['Time period,T',T])
+
 			to_df2.append(['Site class',site_class])
 			to_df2.append(['Seismic design catagory',seismic_deg_cat])
 			to_df2.append(['Seismic force resisting system',seismic_force_resisting_system])
