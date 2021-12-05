@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<style>
+#myContainer {
+  width: 4000px;
+  height: 4000px;
+  position: relative;
+  
+}
+#myAnimation {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+ 
+  border-radius: 50%;
+}
+#myAnimation2 {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  background-color: green;
+  border-radius: 50%;
+}
+#load {
+  
+  padding-left: 7px;
+
+}
+</style>
+<body>
+<input type="number" id='number_of_wheels_id' placeholder="number_of_wheels">
+<button onclick='number_of_wheels_button()'>ok</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+var id = null;
+
+function number_of_wheels_button(){
+	var number_of_wheels_var=document.getElementById('number_of_wheels_id').value;
+	(parseInt(number_of_wheels_var));
+	for(var i=0;i<number_of_wheels_var;i+=1)
+	{
+		document.write("\
+		\
+			<input type='number' id='number_of_wheels_id' placeholder='number_of_wheels'>\
+			<button onclick='number_of_wheels_button()'>ok</button>\
+			<div id ='myContainer'>\
+			<div id ='myAnimation'><i id='load'>10</i></div>\
+			<div id ='myAnimation2'>20</div>\
+			\
+			</div>\
+			");
+
+	}
+
+}
+
+
+
+
+function myMove() {
+  var elem = document.getElementById("myAnimation");
+  var elem2 = document.getElementById("myAnimation2");
+  
+  var pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 10);
+  function frame() {
+    if (pos == 3500) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      //elem.style.top = pos + 'px'; 
+      elem.style.left = pos + 'px'; 
+      elem2.style.left = pos+80 + 'px';
+    }
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

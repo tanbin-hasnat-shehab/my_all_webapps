@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+
+<button onclick="btn_l()" class="btn btn-outline-dark">Draw_member</button>
+<button onclick="sup_fixed()" class="btn btn-outline-dark">fixed support</button>
+
+<button onclick="sup_hinged()" class="btn btn-outline-dark">hinged support</button>
+
+
+<button onclick="json_form()" id='over_btn' class="btn btn-outline-dark">Save</button>
+<input type="number" id='grid_spaces'value=50>
+<input type="text" id='type_op_st'value="beam">
+<input type="text" id='json_in' >
+
+<label style="font-size:30px" id='header'></label>
+
+<style type="text/css">
+  
+</style>
+
+
+<div id="canvasContainer" onclick="point_it(event)" onmousemove ="show_ord(event)">
+                          <canvas id="canvas" width="3000" height="100",class='mycanvas'>
+                            
+                           </canvas>
+
+
+
+
+
+<script language="JavaScript">
+var c=0;
+var cc=0;
+var x1,x2,y1,y2;
+var data=[];
+var data_unique=[];
+var g=1000;
+var grid_sp=parseInt(document.getElementById('grid_spaces').value);
+var st_type=document.getElementById('type_op_st').value;
+
+function json_form(){
+  var grid_sp1=parseInt(document.getElementById('grid_spaces').value);
+  grid_sp1=50/grid_sp1;
+  var st_type1=document.getElementById('type_op_st').value;
+
+  data.push({'type':'type_of_st','value':st_type1},{'type':'grid_spacing','value':grid_sp1});
+  var json_str = JSON.stringify(data);
+  document.cookie = 'show_results' + "=" + json_str;
+  document.getElementById('json_in').value=json_str;
+  abc();
+  function abc(){
+    js_input=document.getElementById('json_in').select();
+    document.execCommand('copy');
+    }
+
+
+
+
+
+
+  
+  //navigator.clipboard.writeText(json_str);
+  console.log(json_str);
+
+
+
+
+
+
+
+}
+
+var grid_spacing=50;
+var mathCanvas = document.getElementById("canvas");
+var ctx = mathCanvas.getContext("2d");
+//ctx.globalCompositeOperation = 'destination-over'
+ctx.fillStyle = "#FDFBE3";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+draw_defaults();
+function draw_defaults(){
+        for (let i = 0; i < 10000; i+=grid_spacing) {
+                ctx.beginPath();
+                
+                ctx.moveTo(0, i);
+                ctx.lineTo(10000,i);
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i,10000);
+                
+                ctx.stroke();}
+
+}
+
+  function show_ord(event){
+        var type_of_st=document.getElementById('type_op_st').value;
+        var grid_sp=document.getElementById('grid_spaces').value;
+        var factor_grid=50/grid_sp;
+        var xx=event.offsetX;
+        var yy=event.offsetY;
+        document.getElementById('header').innerHTML='Mouse position at :  '+xx/factor_grid+','+yy/factor_grid;
+        
+      }
+
+
+
+
+
+
+
+
+  function btn_p(){
+          c=1;}
+
+ function btn_l(){
+          c=2;}
+ function sup_fixed(){
+          c=3;
+          
+}
+ function sup_hinged(){
+          c=4;
+        }
+
+   function roller_support_fn(){
+          c=5;
+        }
+
+
+
+
+
+  function point_it(event){
+
+        if(c===1){
+              var img = new Image();
+              //img.src = "https://i.ibb.co/7gKxPm5/a.png";
+              img.src='https://i.ibb.co/611D68d/aa.png';
+              //img.src = "a.png";
+
+              var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
+              var offy=Math.round(event.offsetY / grid_spacing) * grid_spacing;
+              var x=offx-img.width/2-10;
+              var y=offy-img.height+5;
+              document.getElementById('header').value=offx+','+offy;
+              
+
+              ctx.drawImage(img,x,y);
+             
+
+
+              point_load_input(offx, offy);
+
+              function point_load_input(x, y) {
+
+                      var input = document.createElement('input');
+                      
+
+                      input.type = 'text';
+                      input.placeholder='P';
+                      input.style.position = 'fixed';
+                      input.style.left = (x-10) + 'px';
+                      input.style.width = 30 + 'px';
+                      input.style.top = (y ) + 'px';
+
+                      
+
+                      input.onkeydown = handleEnter;
+                      
+                     
+
+                      document.body.appendChild(input);
+                    }
+              function handleEnter(e) {
+                      
+
+                      var keyCode = e.keyCode;
+                      if (keyCode === 8){document.body.removeChild(this);hasInput = false;}
+                      if (keyCode === 13) {
+                          drawText_and_send(this.value, parseInt(this.style.left, 10), parseInt(this.style.top, 10));
+                          document.body.removeChild(this);
+                          hasInput = false;
+                      }
+                  }
+
+            //Draw the text onto canvas:
+            function drawText_and_send(txt, x1, y1) {
+                      //console.log('value is '+txt);
+                      //console.log('co ord '+offx+','+offy);
+                      ctx.textBaseline = 'top';
+                      ctx.textAlign = 'left';
+                      ctx.font = '15px Arial';
+                      ctx.fillStyle = "#FF5733";
+                      values=txt.split(',');
+                      if(values[1]==undefined){values[1]=0;}
+                      ctx.fillText((values[0]+','+values[1]+' deg'), x1-30, y1 - 70);
+
+                      var new_y=g-offy;
+                      var new_load=parseFloat(values[0]);
+                      var new_rotation=parseFloat(values[1]);
+                      data.push({'type':'point_load','load':new_load,'rotation':new_rotation,'pos_x':offx,'pos_y':new_y});
+                      
+
+                    
+
+                  }
+
+             }
+      
+
+      if(c===2){
+
+                if(cc===0){
+                  x1=(Math.round(event.offsetX / grid_spacing) * grid_spacing); 
+                  y1=(Math.round(event.offsetY / grid_spacing) * grid_spacing); 
+                  ctx.fillRect(x1-5,y1-5,10,10);
+                  console.log('leave it 1st    '+x1+','+y1+','+x2+','+y2+'   and cc = '+cc);
+                  cc++;
+                }
+
+                
+                else {
+                  
+                  
+                  x2=(Math.round(event.offsetX / grid_spacing) * grid_spacing); 
+                  y2=(Math.round(event.offsetY / grid_spacing) * grid_spacing);
+                  ctx.fillRect(x2-5,y2-5,10,10);
+                  ctx.moveTo(x1, y1);
+                  ctx.lineTo(x2,y2);
+                  ctx.lineWidth=3;
+                  ctx.stroke();
+                  var new_y1=g-y1;
+                  var new_y2=g-y2;
+                  cc=0;
+                  line_data_input(x1,y1,x2,y2);
+
+
+                  function line_data_input(xp1,yp1,xp2,yp2){
+
+                  var input = document.createElement('input');
+                      input.type = 'text';
+                      input.placeholder='EA,w';
+                      input.style.position = 'fixed';
+                      input.style.left = (xp1+xp2)/2 + 'px';
+                      input.style.width = 30 + 'px';
+                      input.style.top = (yp1+yp2 )/2 + 'px';
+                      input.onkeydown = handleEnter;
+                      document.body.appendChild(input);
+                    }
+                    function handleEnter(e) {
+                                                  var keyCode = e.keyCode;
+                                                  if (keyCode === 13) {
+                                                      var left=parseInt(this.style.left);
+                                                      var top=parseInt(this.style.top);
+                                                      line_data_send(this.value,left,top);
+                                                      document.body.removeChild(this);
+                                                      hasInput = false;
+                                                      
+                                                                      }
+                                          } 
+
+                    function line_data_send(txt, x_x, y_y) {
+                                                                  ctx.textBaseline = 'top';
+                                                                  ctx.fillStyle = "#ff0000";
+                                                                  ctx.textAlign = 'left';
+                                                                  ctx.font = '10px Arial';
+                                                                  line_val=txt.split(',');
+                                                                  if(line_val[1]==undefined){line_val[1]=0;}
+                                                                  if(line_val[0]==''){line_val[0]=1;}
+                                                                  ctx.fillText(('EA = '+line_val[0]+',w = '+line_val[1]), x_x, y_y);
+
+                                                                  
+                                                                  var EA=parseFloat(line_val[0]);
+                                                                  var W=parseFloat(line_val[1]);
+                                                                  
+                                                                  data.push({'type':'line','x1':x1,'y1':new_y1,'x2':x2,'y2':new_y2,'EA':EA,'W':W});
+                                                            }
+
+                                              
+
+                
+                }
+              }
+      if(c===3){
+              var img = new Image();
+              //img.src = "https://i.ibb.co/7gKxPm5/a.png";
+              img.src = "https://i.ibb.co/vv04R1z/fixed.png";
+              //img.src='https://linkpicture.com/q/1-1.png';
+
+
+              var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
+              var offy=Math.round(event.offsetY / grid_spacing) * grid_spacing;
+              var x=offx-img.width/2;
+              var y=offy-img.height+img.height;
+              ctx.drawImage(img,x,y);
+              
+              console.log(offx+','+offy);
+              var new_yy=g-offy;
+              data.push({'type':'fixed_support','x':offx,'y':new_yy});
+              
+
+              
+              
+
+              //if(data.some(item => item ==={'type':'fixed_support','x':offx,'y':offy}) ===false)
+              
+                      
+              
+
+            }
+      if(c===4){
+              var img = new Image();
+              //img.src = "https://i.ibb.co/7gKxPm5/a.png";
+              img.src = "https://i.ibb.co/pXjLSgt/hinged.png";
+
+
+              var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
+              var offy=Math.round(event.offsetY / grid_spacing) * grid_spacing;
+              var x=offx-img.width/2;
+              var y=offy-img.height+img.height;
+              
+              console.log(offx+','+offy)
+              var new_yyy=g-offy;
+              data.push({'type':'hinged_support','x':offx,'y':new_yyy});
+
+              ctx.drawImage(img,x,y);
+            }
+
+      if(c===5){
+              var img = new Image();
+              //img.src = "https://i.ibb.co/7gKxPm5/a.png";
+              img.src = "https://i.ibb.co/1T8RZrb/dow1nload.png";
+
+
+              var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
+              var offy=Math.round(event.offsetY / grid_spacing) * grid_spacing;
+              var x=offx-img.width/2;
+              var y=offy-img.height+img.height;
+              
+              console.log(offx+','+offy)
+              var new_yyy=g-offy;
+              data.push({'type':'roller_support','x':offx,'y':new_yyy});
+
+              ctx.drawImage(img,x,y-15);
+            }
+
+
+}
+</script>
+
+
+
+
+</body>
+</html>
+
+
+
