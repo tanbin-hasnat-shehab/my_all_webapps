@@ -13,13 +13,14 @@ from sfd import sfd
 
 
 choices=st.sidebar.selectbox('list of apps',['Earthquak load calculation',
-											'wind load calculation',
 											'structural analysis of beam,frame,truss',
 											'aisc steel section database',
 											'circle detection',
 											'critical path method-cpm',
 											'location phising',
-											'moving load analysis'
+											'moving load analysis',
+											'wind load calculation',
+											'Contact dev'
 											])
 
 
@@ -41,6 +42,17 @@ if choices=='location phising':
 	loc_ph.loc_main()
 if choices=='moving load analysis':
 	go.moving_main()
+
+if choices=='wind load calculation':
+	st.title('coming soon..')
+
+
+
+if choices=='Contact dev':
+	st.title('About me')
+	messege=f'<p style="font-family:Courier; color:Red; font-size: 20px;">mail - tanbinhasnat04@gmail.com</p>'
+	st.markdown(messege, unsafe_allow_html=True)
+
 
 
 	
