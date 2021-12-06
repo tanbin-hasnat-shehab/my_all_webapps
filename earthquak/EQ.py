@@ -101,7 +101,7 @@ def Earthquak_load_cal():
 			seismic_force_resisting_system_suggestion='special seismic_force_resisting_system'
 		print(seismic_force_resisting_system_suggestion)
 		my_splsh=f'<p style="font-family:Courier; color:Blue; font-size: 20px;">{seismic_force_resisting_system_suggestion}</p>'
-		st.markdown(my_splsh, unsafe_allow_html=True)
+		st.success(f'{seismic_force_resisting_system_suggestion}')
 
 
 		seismic_force_resisting_system_arr=[]
