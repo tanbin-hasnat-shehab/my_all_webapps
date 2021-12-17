@@ -224,7 +224,7 @@ def sfd_bmd():
 			ss.add_support_roll(node_id=ss.find_node_id([rolled[i]['x'],rolled[i]['y']]))
 		ss.solve()
 
-		wb=load_workbook('data.xlsx')
+		wb=load_workbook('sfd/data.xlsx')
 		dis=wb['DISPLACEMENTS']
 		ben=wb['BENDING_MOMENT']
 		axi=wb['AXIAL_FORCE']
