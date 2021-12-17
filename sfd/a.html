@@ -110,41 +110,59 @@
 
 
 
-
-
-
 </style>
-  
-  
-  
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 
-<div class='radio' onclick="tr_fn()">
-  <input label="POINT LOAD" type="radio"id="pointt" name="gender" value="point_load" >
-  <input label="DRAW MEMBER" type="radio" id="memberr" name="gender" value="member">
-  <input label="FIXED SUPPORT" type="radio" id="fixedd" name="gender" value="fixedd">
-  <input label="HINGED SUPPORT" type="radio" id="hingedd" name="gender" value="hingedd">
-  <input label="ROLLER SUPPORT" type="radio" id="rolledd" name="gender" value="rolledd">
-  <input label="SAVE" type="radio" id="savee" name="gender" value="savee">
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
+  rel="stylesheet"
+/>
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group"onclick="tr_fn()">
+
+
+
+
+
+  <input type="radio" class='btn-check' id="pointt" name="gender" value="point_load" >
+  <label class="btn btn-secondary" for="pointt">POINT LOAD</label>
+
+
+  <input type="radio" class='btn-check' id="memberr" name="gender" value="member" >
+  <label class="btn btn-secondary" for="memberr">DRAW MEMBER</label>
+
+  <input type="radio" class='btn-check' id="fixedd" name="gender" value="fixedd">
+  <label class="btn btn-secondary" for="fixedd">FIXED SUPPORT</label>
+
+  <input type="radio" class='btn-check' id="hingedd" name="gender" value="hingedd">
+  <label class="btn btn-secondary" for="hingedd">HINGED SUPPORT</label>
+
+  <input type="radio" class='btn-check' id="rolledd" name="gender" value="rolledd">
+  <label class="btn btn-secondary" for="rolledd">ROLLER SUPPORT</label>
+
+  <input type="radio"class='btn-check' id="savee" name="gender" value="savee">
+  <label class="btn btn-secondary" for="savee">SAVE</label>
+
 </div>
 
 <label>Grid spacing</label>
@@ -157,7 +175,6 @@
   
   <label style="font-size:20px" id='header'></label>
 </div>
-
 
 
 
