@@ -12,8 +12,8 @@ from moving_load import go
 from sfd import sfd
 
 
-choices=st.sidebar.selectbox('list of apps',['Earthquak load calculation',
-											'structural analysis of beam,frame,truss',
+choices=st.sidebar.selectbox('list of apps',['structural analysis of beam,frame,truss','Earthquak load calculation',
+											
 											'aisc steel section database',
 											'circle detection',
 											'critical path method-cpm',
