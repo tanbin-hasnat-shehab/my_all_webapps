@@ -50,7 +50,7 @@ if choices=='wind load calculation':
 
 if choices=='Contact dev':
 	st.title('About me')
-	messege=f'<p style="font-family:Courier; color:Red; font-size: 20px;">mail - tanbinhasnat04@gmail.com</p>'
+	messege=f'<p style="font-family:Courier; color:Red; font-size: 20px;">mail - tanbinhasnat04@gmail.com  git - https://github.com/tanbin-hasnat-shehab</p>'
 	st.markdown(messege, unsafe_allow_html=True)
 
 
