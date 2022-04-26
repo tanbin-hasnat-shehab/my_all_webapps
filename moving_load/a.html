@@ -3,34 +3,185 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-
-
-
-<button onclick="btn_l()" class="btn btn-outline-dark">Draw_member</button>
-<button onclick="sup_fixed()" class="btn btn-outline-dark">fixed support</button>
-
-<button onclick="sup_hinged()" class="btn btn-outline-dark">hinged support</button>
-
-
-<button onclick="json_form()" id='over_btn' class="btn btn-outline-dark">Save</button>
-<input type="number" id='grid_spaces'value=50>
-<input type="text" id='type_op_st'value="beam">
-<input type="text" id='json_in' >
-
-<label style="font-size:30px" id='header'></label>
-
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style type="text/css">
+  body {
+  background: linear-gradient(-45deg,#CDD9FF,#A5BAFD,#F7DBD5,#FCEDEA,#FEF9F8,#FCFCBA,#FAFAA7,#EAFDE6,#D7FECF,#ADFA9D);
+  background-size: 800% 800%;
+  animation: gradient 20s ease infinite;
+  height: 100vh;
+  cursor: crosshair;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
   
+
+#content {
+  margin-top: 100px;
+}
+
+
+.radio {
+  background: #454857;
+  padding: 4px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 3px rgba(35, 33, 45, 0.3),
+    0 0 0 3px rgba(185, 185, 185, 0.3);
+  position: relative;
+}
+
+.radio input {
+  width: auto;
+  height: 100%;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 4px 8px;
+  background: #454857;
+  color: #bdbdbdbd;
+  font-size: 14px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  transition: all 100ms linear;
+}
+
+.radio input:checked {
+  background-image: linear-gradient(180deg, #95d891, #74bbad);
+  color: #fff;
+  box-shadow: 0 1px 1px #0000002e;
+  text-shadow: 0 1px 0px #79485f7a;
+}
+
+.radio input:before {
+  content: attr(label);
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+
+.h_pos{
+  margin: 0;
+    padding: 0;
+    overflow: hidden;
+   
+    width: 200px;
+}
+
+.header{
+  position: absolute;
+     box-shadow: 5px 5px 50px 2px rgba(0,0,0,1);
+    transform: translate(-50%,50%);
+    height: 35px;
+    width: 120px;
+    border-radius: 10px;
+    
+     
+}
+
+
+
+
+
+
+
+
+
 </style>
+
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
+  rel="stylesheet"
+/>
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group"onclick="tr_fn()">
+
+
+
+
+
+  <input type="radio" class='btn-check' id="pointt" name="gender" value="point_load" >
+  <label class="btn btn-secondary" for="pointt">POINT LOAD</label>
+
+
+  <input type="radio" class='btn-check' id="memberr" name="gender" value="member" >
+  <label class="btn btn-secondary" for="memberr">DRAW MEMBER</label>
+
+  <input type="radio" class='btn-check' id="fixedd" name="gender" value="fixedd">
+  <label class="btn btn-secondary" for="fixedd">FIXED SUPPORT</label>
+
+  <input type="radio" class='btn-check' id="hingedd" name="gender" value="hingedd">
+  <label class="btn btn-secondary" for="hingedd">HINGED SUPPORT</label>
+
+  <input type="radio" class='btn-check' id="rolledd" name="gender" value="rolledd">
+  <label class="btn btn-secondary" for="rolledd">ROLLER SUPPORT</label>
+
+  <input type="radio"class='btn-check' id="savee" name="gender" value="savee">
+  <label class="btn btn-secondary" for="savee">SAVE</label>
+
+</div>
+
+<label>Grid spacing</label>
+  <input type="number" id='grid_spaces'value=50>
+  <label>Type of structure</label>
+  <input type="text" id='type_op_st'value="truss">
+  <input type="text" id='json_in' >
+
+<div class='header' id='h_pos'>
+  
+  <label style="font-size:20px" id='header'></label>
+</div>
+
+
+
 
 
 <div id="canvasContainer" onclick="point_it(event)" onmousemove ="show_ord(event)">
-                          <canvas id="canvas" width="3000" height="100",class='mycanvas'>
+                          <canvas id="canvas" width="3000" height="3000",class='mycanvas'>
                             
                            </canvas>
 
@@ -39,6 +190,27 @@
 
 
 <script language="JavaScript">
+  function tr_fn(){
+    if(document.getElementById('pointt').checked) {
+  btn_p();
+}else if(document.getElementById('memberr').checked) {
+ btn_l();
+}
+else if(document.getElementById('fixedd').checked) {
+ sup_fixed();
+}
+else if(document.getElementById('hingedd').checked) {
+ sup_hinged();
+}
+else if(document.getElementById('rolledd').checked) {
+ sup_roll();
+}
+else if(document.getElementById('savee').checked) {
+ json_form();
+}
+
+
+  }
 var c=0;
 var cc=0;
 var x1,x2,y1,y2;
@@ -83,9 +255,6 @@ function json_form(){
 var grid_spacing=50;
 var mathCanvas = document.getElementById("canvas");
 var ctx = mathCanvas.getContext("2d");
-//ctx.globalCompositeOperation = 'destination-over'
-ctx.fillStyle = "#FDFBE3";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
     
 draw_defaults();
 function draw_defaults(){
@@ -105,12 +274,17 @@ function draw_defaults(){
 }
 
   function show_ord(event){
+        var header_pos=document.getElementById('h_pos');
+        let left=event.offsetX-100;
+        let top=event.offsetY;
+        header_pos.style.left=left+'px';
+        header_pos.style.top=top+'px';
         var type_of_st=document.getElementById('type_op_st').value;
         var grid_sp=document.getElementById('grid_spaces').value;
         var factor_grid=50/grid_sp;
         var xx=event.offsetX;
         var yy=event.offsetY;
-        document.getElementById('header').innerHTML='Mouse position at :  '+xx/factor_grid+','+yy/factor_grid;
+        document.getElementById('header').innerHTML='x:'+Math.round(xx/factor_grid)+' y:'+Math.round(yy/factor_grid);
         
       }
 
@@ -133,8 +307,7 @@ function draw_defaults(){
  function sup_hinged(){
           c=4;
         }
-
-   function roller_support_fn(){
+ function sup_roll(){
           c=5;
         }
 
@@ -147,8 +320,8 @@ function draw_defaults(){
         if(c===1){
               var img = new Image();
               //img.src = "https://i.ibb.co/7gKxPm5/a.png";
-              img.src='https://i.ibb.co/611D68d/aa.png';
-              //img.src = "a.png";
+              //img.src='https://i.ibb.co/611D68d/aa.png';
+              img.src = "point.png";
 
               var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
               var offy=Math.round(event.offsetY / grid_spacing) * grid_spacing;
@@ -296,9 +469,9 @@ function draw_defaults(){
       if(c===3){
               var img = new Image();
               //img.src = "https://i.ibb.co/7gKxPm5/a.png";
-              img.src = "https://i.ibb.co/vv04R1z/fixed.png";
-              //img.src='https://linkpicture.com/q/1-1.png';
-
+              //img.src = "https://i.ibb.co/7r2ZwhC/fixed.png";
+              //img.src='https://i.ibb.co/T4f0wSr/fixed.png';
+		img.src='fixed.png';
 
               var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
               var offy=Math.round(event.offsetY / grid_spacing) * grid_spacing;
@@ -323,7 +496,8 @@ function draw_defaults(){
       if(c===4){
               var img = new Image();
               //img.src = "https://i.ibb.co/7gKxPm5/a.png";
-              img.src = "https://i.ibb.co/pXjLSgt/hinged.png";
+              //img.src = "https://i.ibb.co/pXjLSgt/hinged.png";
+              img.src='hinged.png'
 
 
               var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
@@ -337,12 +511,10 @@ function draw_defaults(){
 
               ctx.drawImage(img,x,y);
             }
-
       if(c===5){
               var img = new Image();
-              //img.src = "https://i.ibb.co/7gKxPm5/a.png";
-              img.src = "https://i.ibb.co/1T8RZrb/dow1nload.png";
-
+              //img.src='https://i.ibb.co/wyBP90p/roll.png'
+	      img.src='roll.png'
 
               var offx=   Math.round(event.offsetX / grid_spacing) * grid_spacing;    
               var offy=Math.round(event.offsetY / grid_spacing) * grid_spacing;
@@ -351,9 +523,9 @@ function draw_defaults(){
               
               console.log(offx+','+offy)
               var new_yyy=g-offy;
-              data.push({'type':'roller_support','x':offx,'y':new_yyy});
+              data.push({'type':'rolled_support','x':offx,'y':new_yyy});
 
-              ctx.drawImage(img,x,y-15);
+              ctx.drawImage(img,x,y);
             }
 
 
