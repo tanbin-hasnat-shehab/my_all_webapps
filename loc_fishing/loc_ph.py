@@ -8,4 +8,4 @@ def loc_main():
 		stc.html(page,width=width,height=height,scrolling=False)
 
 
-	my_html('loc_fishing/map.html')
+	my_html('loc_fishing/map2.html')
