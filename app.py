@@ -10,6 +10,7 @@ from circle_detection import cir
 from cpm_python import cp3
 from moving_load import go
 from sfd import sfd
+from block_chain import blc
 
 
 choices=st.sidebar.selectbox('list of apps',['structural analysis of beam,frame,truss','Earthquak load calculation',
@@ -20,12 +21,15 @@ choices=st.sidebar.selectbox('list of apps',['structural analysis of beam,frame,
 											'location phising',
 											'moving load analysis',
 											'wind load calculation',
+					     						'block chain hashlib sha256',
 											'Contact dev'
 											])
 
 
 if choices=='Earthquak load calculation':
 	EQ.Earthquak_load_cal()
+if choices=='block chain hashlib sha256':
+	blc.blc_fn()
 if choices=='structural analysis of beam,frame,truss':
 	sfd.sfd_bmd()
 
