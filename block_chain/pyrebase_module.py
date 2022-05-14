@@ -24,7 +24,7 @@ config = {
 #copy db link to databaseURL
 
 
-  "serviceAccount":"creds.json",
+  "serviceAccount":"block_chain/creds.json",
   "databaseURL" :""
   
 
