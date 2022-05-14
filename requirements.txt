@@ -8,3 +8,4 @@ numpy==1.19.4
 pandas==1.1.4
 Pillow==8.4.0
 plotly==5.4.0
+pyrebase5 == 5.0.1
