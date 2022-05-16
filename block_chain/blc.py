@@ -94,7 +94,7 @@ def blc_fn():
 			check_vote(ser,ID_NO)
 	see_d=st.checkbox('see database')
 	if see_d:
-		db=object_database('mydb')
-		my_data=db.show_data()
-		st.write(my_data)
+		db1=object_database(database_name='mydb')
+		my_data1=db1.show_data()
+		st.write(my_data1)
 		st.write(f'Link is \n https://console.firebase.google.com/u/0/project/my-project-5277687837074/database/my-project-5277687837074-default-rtdb/data/~2F')
