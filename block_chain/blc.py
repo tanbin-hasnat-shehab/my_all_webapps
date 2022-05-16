@@ -11,7 +11,8 @@ def blc_fn():
 	with c2:
 		vote=st.radio('select vote',['A','B'])
 		terminate=st.text_input('delete database enter admin key')
-		terminate=int(terminate)
+		if terminate:
+			terminate=int(terminate)
 
 	db=object_database(database_name='mydb')
 	all_data=db.show_data()
