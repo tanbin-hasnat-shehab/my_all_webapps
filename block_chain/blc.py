@@ -10,6 +10,8 @@ def blc_fn():
 		ID=st.text_input('enter id')
 	with c2:
 		vote=st.radio('select vote',['A','B'])
+		terminate=st.text_input('delete database enter admin key')
+		terminate=int(terminate)
 
 	db=object_database(database_name='mydb')
 	all_data=db.show_data()
@@ -18,7 +20,8 @@ def blc_fn():
 	if all_data==None:
 		db.input_data(path='user-1/ID',value='xxxxx')
 		db.input_data(path='user-1/VOTE',value='X')
-
+	if terminate==441:
+		db.delete_data(path='mydb')
 	#db=object_database(database_name='mydb')
 	#db.input_data(path='initiate',value=True)
 
@@ -88,3 +91,8 @@ def blc_fn():
 		ID_NO=st.text_input('ID_NO')
 		if ser!='' and ID_NO!='':
 			check_vote(ser,ID_NO)
+	see_d=st.checkbox('see database')
+	if see_d:
+		my_data=db.show_data()
+		st.write(my_data)
+		st.write(f'Link is \n https://console.firebase.google.com/u/0/project/my-project-5277687837074/database/my-project-5277687837074-default-rtdb/data/~2F')
