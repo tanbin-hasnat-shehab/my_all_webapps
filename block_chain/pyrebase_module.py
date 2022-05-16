@@ -97,7 +97,7 @@ class object_database():
       data=self.database_obj.child(f'{self.db_name}').get().val()
     return data
   def delete_data(self,*args,**kwargs):
-    dta_path=kwargs.get('path',None)
+    dta_path=kwargs.get('path','')
     full_path=dta_path.split('/')
 
     if len(full_path)==1:
