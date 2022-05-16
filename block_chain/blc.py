@@ -22,7 +22,7 @@ def blc_fn():
 		db.input_data(path='user-1/ID',value='xxxxx')
 		db.input_data(path='user-1/VOTE',value='X')
 	if terminate==441:
-		db.delete_data(path='mydb')
+		db.delete_data()
 	#db=object_database(database_name='mydb')
 	#db.input_data(path='initiate',value=True)
 
