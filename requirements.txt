@@ -10,3 +10,4 @@ Pillow==8.4.0
 plotly==5.4.0
 pyrebase5 == 5.0.1
 click==7.0
+requests-toolbelt==0.10.1
